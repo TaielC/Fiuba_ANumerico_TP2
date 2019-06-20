@@ -1,7 +1,7 @@
 from math import pi
 from math import e
 
-numero_padron = 102145
+numero_padron = 100000
 
 # Propiedades del Material
 densidad = 7850 # kg/m³
@@ -22,9 +22,9 @@ cte_StefanBoltzmann = 5.6703 * 10**-8 # W/m²K
 factor_emisividad_tubo = 0.85
 
 # Parámetros del Proceso 
-cadencia = int(round( -10 / (10000 * (numero_padron - 90000)) + 35 )) # s
-T1_default = int(round( 200 / (10000 * (numero_padron - 90000)) + 500 )) + 273.15 # K
-T2_default = int(round( 200 / (10000 * (numero_padron - 90000)) + 800 )) + 273.15 # K
+cadencia = int(round( -10 / 10000 * (numero_padron - 90000) + 35 )) # s
+T1_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) +273.15 # K
+T2_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) +273.15 # K
 
 # Constantes
 area_intercambio_calor = pi * diametro * longitud_tubo
