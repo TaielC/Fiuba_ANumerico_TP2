@@ -10,4 +10,3 @@ def graficar(puntos):
 	plt.grid()
 	plt.show()
 
-graficar([(0,1),(1,2),(2,3),(3,4)])

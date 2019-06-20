@@ -1,6 +1,3 @@
-def funcion(t,y):
-	return y - t**2 + 1
-
 
 def runge_kutta(funcion,h,punto_inicio,punto_fin,valor_inicial):
 	'''funcion es de la forma f(t,y)'''
@@ -34,3 +31,4 @@ def calcular_k3(funcion,ti,yi,h,k2):
 
 def calcular_k4(funcion,ti,yi,h,k3):
 	return funcion(ti+h,yi+k3*h)
+	

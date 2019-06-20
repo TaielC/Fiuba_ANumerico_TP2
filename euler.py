@@ -1,5 +1,3 @@
-def funcion(t,y):
-	return y - t**2 + 1
 
 def euler(funcion,h,punto_inicio,punto_fin,valor_inicial):
 	'''funcion es de la forma f(t,y)'''
@@ -15,3 +13,4 @@ def euler(funcion,h,punto_inicio,punto_fin,valor_inicial):
 		resultados.append((punto_inicio+h*i,resultado_actual))
 
 	return resultados
+	

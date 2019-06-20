@@ -33,17 +33,18 @@ T_0 = 20 + 273.15 # K
 velocidad = longitud / (n_bols * cadencia)
 
 
-def funcion_sin_radiacion(T, T1_entorno):
+def funcion_sin_radiacion(t, T, T1_entorno=T1_default, T2_entorno=T2_default):
+	T_entorno = T1_entorno if t * velocidad < longitud//2 else T2_entorno
 	return ( coef_conveccion * area_intercambio_calor * ( T - T_entorno ) / ( - masa * calor_especifico ) )
 
 
 def solucion_sin_radiacion(t, T1_entorno=T1_default, T2_entorno=T2_default):
-	T_entorno = T1_entorno if t * velocidad < 25 else T2_entorno
+	T_entorno = T1_entorno if t * velocidad < longitud//2 else T2_entorno
 	return ( T_entorno + (T_0 - T_entorno) * e ** ( - coef_conveccion * area_intercambio_calor * t / ( masa * calor_especifico ) ) )
 
 
-def funcion_completa(T, T_entorno):
+def funcion_completa(T, T1_entorno=T1_default, T2_entorno=T2_default):
+	T_entorno = T1_entorno if t * velocidad < longitud//2 else T2_entorno
 	return ( ( coef_conveccion * area_intercambio_calor * ( T - T_entorno ) + \
 			cte_StefanBoltzmann * factor_emisividad_tubo * area_intercambio_calor * (T**4 - T_entorno**4) ) /\
 			( - masa * calor_especifico ) )
-
