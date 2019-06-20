@@ -23,6 +23,21 @@ def calcular_error_relativo(resultados_reales, resultados):
 		lista.append((resultados_reales[i][0], abs(resultados_reales[i][1]-resultados[i][1])/resultados_reales[i][1]))
 	return lista
 
+def soaking(resultados):
+	tf = resultados[-1][0]
+	T_arranque = resultados[-1][1] -10
+	ti = 0
+	n = 0
+	temp = 0
+	for resultado in resultados:
+		if resultado[1] >= T_arranque:
+			if ti == 0:
+				ti = resultado[0]
+			n+=1
+			temp+=resultado[1]
+
+	return (tf-ti),(temp/n)
+
 def Punto_1():
 	punto_inicio = 0 # s
 	punto_final = longitud / velocidad # s
