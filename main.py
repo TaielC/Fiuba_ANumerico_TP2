@@ -51,7 +51,7 @@ def Punto_1():
 
 	guardar_grafico_tiempo_vs_temperatura("Método Euler", resolucion_euler)
 	guardar_grafico_tiempo_vs_temperatura("Método Runge-Kutta", resolucion_runge_kutta)
-	guardar_grafico_tiempo_vs_temperatura("Comparación de Métodods con Solución Analítica", \
+	guardar_grafico_tiempo_vs_temperatura("Comparación de Métodos con Solución Analítica", \
 		resultados_reales, resolucion_euler, resolucion_runge_kutta)
 
 	error_relativo_euler = calcular_error_relativo(resultados_reales, resolucion_euler)
