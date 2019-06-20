@@ -49,10 +49,8 @@ def Punto_1():
 	resolucion_runge_kutta = runge_kutta(funcion_sin_radiacion, cadencia, punto_inicio, punto_final, T_0)
 	resultados_reales = calcular_resultados_reales(solucion_sin_radiacion, cadencia, punto_inicio, punto_final)
 
-	guardar_grafico_tiempo_vs_temperatura("Método Euler", resolucion_euler)
-	guardar_grafico_tiempo_vs_temperatura("Método Runge-Kutta", resolucion_runge_kutta)
-	guardar_grafico_tiempo_vs_temperatura("Comparación de Métodos con Solución Analítica", \
-		resultados_reales, resolucion_euler, resolucion_runge_kutta)
+	guardar_grafico_tiempo_vs_temperatura("Método Euler", resultados_reales, "Solución Analítica", resolucion_euler, "Euler")
+	guardar_grafico_tiempo_vs_temperatura("Método Runge-Kutta", resultados_reales, "Solución Analítica", resolucion_runge_kutta, "Runge-Kutta")
 
 	error_relativo_euler = calcular_error_relativo(resultados_reales, resolucion_euler)
 	error_relativo_runge_kutta = calcular_error_relativo(resultados_reales, resolucion_runge_kutta)
@@ -66,11 +64,11 @@ def Punto_2():
 	punto_final = longitud / velocidad # s
 	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0)
 
-	guardar_grafico_tiempo_vs_temperatura("Resultados obtenidos", resolucion_runge_kutta)
+	guardar_grafico_tiempo_vs_temperatura("Resultados obtenidos", resolucion_runge_kutta, "Runge-Kutta")
 
 	resultados_reales_punto_1 = calcular_resultados_reales(solucion_sin_radiacion, cadencia, punto_inicio, punto_final)
 	guardar_grafico_tiempo_vs_temperatura("Comparación de Resultados con Solución Analítica Sin Radiación", \
-		resultados_reales_punto_1, resolucion_runge_kutta)
+		resolucion_runge_kutta, "Runge-Kutta", resultados_reales_punto_1, "Solución Analítica")
 
 	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
 	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")
