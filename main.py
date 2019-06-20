@@ -81,3 +81,13 @@ def Punto_3(T1, T2):
 	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1, T2)
 	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
 	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")
+
+def duracion_y_temperatura_soaking(T1, T2):
+	punto_inicio = 0 # s
+	punto_final = longitud / velocidad # s
+	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1, T2)
+	return soaking(resolucion_runge_kutta)
+
+def F(T1, T2, tiempo_soaking, temperatura_soaking):
+	tiempo_soaking_aux, temperatura_soaking_aux = duracion_y_temperatura_soaking(T1, T2)
+	return tiempo_soaking_aux-tiempo_soaking, temperatura_soaking_aux-temperatura_soaking
