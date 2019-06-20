@@ -1,7 +1,7 @@
-from datos_fijos import *
 from euler import *
 from runge_kutta import *
 from graficadora import *
+from datos_fijos import *
 
 
 def transformar_a_celcius_minutos(resultados):
@@ -75,3 +75,11 @@ def Punto_2():
 	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
 	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")
 
+def Punto_3(T1, T2):
+	T1 += 273
+	T2 += 273
+	punto_inicio = 0 # s
+	punto_final = longitud / velocidad # s
+	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1, T2)
+	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
+	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")

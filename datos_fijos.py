@@ -23,8 +23,12 @@ factor_emisividad_tubo = 0.85
 
 # Parámetros del Proceso 
 cadencia = int(round( -10 / 10000 * (numero_padron - 90000) + 35 )) # s
-T1_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) +273 # K
-T2_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) +273 # K
+T1_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) # K
+T2_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) # K
+print(T1_default)
+print(T2_default)
+T1_default += 273
+T2_default += 273
 
 # Constantes
 area_intercambio_calor = pi * diametro * longitud_tubo
