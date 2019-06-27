@@ -23,12 +23,8 @@ factor_emisividad_tubo = 0.85
 
 # Parámetros del Proceso 
 cadencia = int(round( -10 / 10000 * (numero_padron - 90000) + 35 )) # s
-T1_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) # K
-T2_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) # K
-print(T1_default)
-print(T2_default)
-T1_default += 273
-T2_default += 273
+T1_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) + 273.15 # K
+T2_default = int(round( 200 / 10000 * (numero_padron - 90000) + 500 )) + 273.15 # K
 
 # Constantes
 area_intercambio_calor = pi * diametro * longitud_tubo
@@ -36,6 +32,9 @@ masa = densidad * pi * diametro * espesor * ( 1 - espesor/diametro ) * longitud_
 T_0 = 20 + 273.15 # K
 velocidad = longitud / (n_bols * cadencia)
 
+print("Cadencia: ", cadencia)
+print("Velocidad: ", velocidad)
+print("Tiempo en Horno: ", cadencia * n_bols, "s, ", cadencia * n_bols /60, "min")
 
 def funcion_sin_radiacion(t, T, T1_entorno=T1_default, T2_entorno=T2_default):
 	T_entorno = T1_entorno if t * velocidad < longitud//2 else T2_entorno

@@ -81,6 +81,7 @@ def Punto_3(T1, T2):
 	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1, T2)
 	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
 	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")
+	guardar_grafico_tiempo_vs_temperatura("10 min de Soaking", resolucion_runge_kutta, "Runge-Kutta", mostrar=True)
 
 def duracion_y_temperatura_soaking(T1, T2):
 	punto_inicio = 0 # s
