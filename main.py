@@ -98,7 +98,7 @@ def F(T1, T2, tiempo_soaking, temperatura_soaking):
 	return tiempo_soaking_aux-tiempo_soaking, temperatura_soaking_aux-temperatura_soaking
 
 
-def Punto_5(tiempo_soaking_objetivo, T_soaking_objetivo, semilla=(0,0), n_max=50):
+def Punto_5(tiempo_soaking_objetivo, T_soaking_objetivo, semilla=(0,0), n_max=500):
 
 	T12 = np.array(list(semilla))
 	objetivo = np.array([T_soaking_objetivo, tiempo_soaking_objetivo])
@@ -107,7 +107,8 @@ def Punto_5(tiempo_soaking_objetivo, T_soaking_objetivo, semilla=(0,0), n_max=50
 
 	for i in range(n_max):
 		tiempo_soaking, T_soaking = duracion_y_temperatura_soaking(T12[0], T12[1])
-		F = np.array([T_soaking, tiempo_soaking]) - objetivo
+		print(f"Tiempo: {tiempo_soaking/60}, Temperatura: {T_soaking}")
+		F = np.array([T_soaking, tiempo_soaking/60]) - objetivo
 		K = np.linalg.solve(J, F)
 		delta = np.max(np.abs(K))
 		print(f'{i+1} {delta} {T12[0]} {T12[1]}')
