@@ -100,20 +100,21 @@ def F(T1, T2, tiempo_soaking, temperatura_soaking):
 
 def Punto_5(tiempo_soaking_objetivo, T_soaking_objetivo, semilla=(0,0), n_max=50):
 
-	T12 = np.array(semilla)
+	T12 = np.array(list(semilla))
 	objetivo = np.array([T_soaking_objetivo, tiempo_soaking_objetivo])
 	abs_tol = 0.5
 	J = np.array([[0.25, 0.75], [0.75, 0.25]])
 
 	for i in range(n_max):
-	    F = np.array(duracion_y_temperatura_soaking(T12[0], T12[1])) - objetivo
-	    K = np.linalg.solve(J, F)
-	    delta = np.max(np.abs(K))
-	    print(f'{i+1} {delta} {T12[0]} {T12[1]}')
-	    T12 = T12 - K
-	    if delta < abs_tol:
-	        break
-	    else:
-	        if i == n_max:
-	            raise ValueError('No hubo convergencia')
+		tiempo_soaking, T_soaking = duracion_y_temperatura_soaking(T12[0], T12[1])
+		F = np.array([T_soaking, tiempo_soaking]) - objetivo
+		K = np.linalg.solve(J, F)
+		delta = np.max(np.abs(K))
+		print(f'{i+1} {delta} {T12[0]} {T12[1]}')
+		T12 = T12 - K
+		if delta < abs_tol:
+			break
+		else:
+			if i == n_max:
+				raise ValueError('No hubo convergencia')
 	print(T12[0], T12[1])

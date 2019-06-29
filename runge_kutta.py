@@ -3,6 +3,7 @@ from math import ceil
 
 def runge_kutta(funcion,h,punto_inicio,punto_fin,valor_inicial, T1=T1_default, T2=T2_default):
 	'''funcion es de la forma f(t,y)'''
+	h = 500
 	resultados = [] # Tuplas de la forma (t,yi)
 	resultados.append((punto_inicio,valor_inicial))
 	cant_pasos = ceil((punto_fin-punto_inicio)/h)
