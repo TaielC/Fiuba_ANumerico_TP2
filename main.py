@@ -1,3 +1,4 @@
+import numpy as np
 from euler import *
 from runge_kutta import *
 from graficadora import *
@@ -31,7 +32,7 @@ def soaking(resultados):
 	tf = resultados[-1][0]
 	T_arranque = resultados[-1][1] -10
 	ti = 0
-	n = 0
+	n = 1
 	temp = 0
 	for resultado in resultados:
 		if resultado[1] >= T_arranque:
@@ -73,7 +74,8 @@ def Punto_2():
 	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
 	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")
 
-def Punto_3(T1, T2):
+
+def Punto_3(T1, T2, mostrar=False):
 	T1 += 273
 	T2 += 273
 	punto_inicio = 0 # s
@@ -81,14 +83,37 @@ def Punto_3(T1, T2):
 	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1, T2)
 	tiempo_soaking, T_soaking = soaking(resolucion_runge_kutta)
 	print(f"Tiempo de Soaking: {tiempo_soaking/60}\n Temperatura Soaking: {T_soaking-273}")
-	guardar_grafico_tiempo_vs_temperatura("10 min de Soaking", resolucion_runge_kutta, "Runge-Kutta", mostrar=True)
+	guardar_grafico_tiempo_vs_temperatura("10 min de Soaking", resolucion_runge_kutta, "Runge-Kutta", mostrar=mostrar)
+
 
 def duracion_y_temperatura_soaking(T1, T2):
 	punto_inicio = 0 # s
 	punto_final = longitud / velocidad # s
-	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1, T2)
+	resolucion_runge_kutta = runge_kutta(funcion_completa, cadencia, punto_inicio, punto_final, T_0, T1+273.15, T2+273.15)
 	return soaking(resolucion_runge_kutta)
+
 
 def F(T1, T2, tiempo_soaking, temperatura_soaking):
 	tiempo_soaking_aux, temperatura_soaking_aux = duracion_y_temperatura_soaking(T1, T2)
 	return tiempo_soaking_aux-tiempo_soaking, temperatura_soaking_aux-temperatura_soaking
+
+
+def Punto_5(tiempo_soaking_objetivo, T_soaking_objetivo, semilla=(0,0), n_max=50):
+
+	T12 = np.array(semilla)
+	objetivo = np.array([T_soaking_objetivo, tiempo_soaking_objetivo])
+	abs_tol = 0.5
+	J = np.array([[0.25, 0.75], [0.75, 0.25]])
+
+	for i in range(n_max):
+	    F = np.array(duracion_y_temperatura_soaking(T12[0], T12[1])) - objetivo
+	    K = np.linalg.solve(J, F)
+	    delta = np.max(np.abs(K))
+	    print(f'{i+1} {delta} {T12[0]} {T12[1]}')
+	    T12 = T12 - K
+	    if delta < abs_tol:
+	        break
+	    else:
+	        if i == n_max:
+	            raise ValueError('No hubo convergencia')
+	print(T12[0], T12[1])
